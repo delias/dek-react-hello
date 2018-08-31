@@ -27,7 +27,7 @@ function formatName(user) {
 const user = {
   firstName: 'Daniel',
   lastName: 'Elias'
-};
+}
 
 const element = (
   <h1>
@@ -36,6 +36,6 @@ const element = (
 );
 
 ReactDOM.render(
-  element,
+  element, 
   document.getElementById('root')
 );
