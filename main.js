@@ -30,6 +30,20 @@ var user = {
   // const element = (
   //   getGreeting(user)
   // );
-};var element = React.createElement('img', { src: user.avatarUrl });
+  // const element = <img src={user.avatarUrl} />;
+};var element = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Hello!'
+  ),
+  React.createElement(
+    'h2',
+    null,
+    'Good to see you here.'
+  )
+);
 
 ReactDOM.render(element, document.getElementById('root'));

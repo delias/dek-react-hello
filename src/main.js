@@ -21,7 +21,13 @@ const user = {
 // const element = (
 //   getGreeting(user)
 // );
-const element = <img src={user.avatarUrl}></img>;
+// const element = <img src={user.avatarUrl} />;
+const element = (
+  <div>
+    <h1>Hello!</h1>
+    <h2>Good to see you here.</h2>
+  </div>
+);
 
 ReactDOM.render(
   element, 
