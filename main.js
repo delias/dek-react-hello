@@ -23,9 +23,13 @@ function getGreeting(user) {
 
 var user = {
   firstName: 'Daniel',
-  lastName: 'Elias'
-};
+  lastName: 'Elias',
+  avatarUrl: 'https://teogracia.com/wp-content/themes/teotheme/images/logoteograciaverde.png'
+  // const element = <div tabIndex="0"></div>;
 
-var element = getGreeting(user);
+  // const element = (
+  //   getGreeting(user)
+  // );
+};var element = React.createElement('img', { src: user.avatarUrl });
 
 ReactDOM.render(element, document.getElementById('root'));
