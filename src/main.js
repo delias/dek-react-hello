@@ -22,10 +22,6 @@ const user = {
 // );
 // const element = <img src={user.avatarUrl} />;
 
-const title = response.potentiallyMaliciousInput;
-// This is safe:
-const element = <h1>{title}</h1>;
-
 // const element = (
 //   <div>
 //     <img src={user.avatarUrl} />
@@ -33,6 +29,18 @@ const element = <h1>{title}</h1>;
 //     <h2>Good to see you here.</h2>
 //   </div>
 // );
+
+// const element = (
+//   <h1 className="greeting">
+//     Hello, world!
+//   </h1>
+// );
+
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
 
 ReactDOM.render(
   element, 
