@@ -24,7 +24,7 @@ function getGreeting(user) {
 var user = {
   firstName: 'Daniel',
   lastName: 'Elias',
-  avatarUrl: 'https://teogracia.com/wp-content/themes/teotheme/images/logoteograciaverde.png'
+  avatarUrl: 'src/logoteogracia.png'
   // const element = <div tabIndex="0"></div>;
 
   // const element = (

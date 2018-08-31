@@ -14,7 +14,7 @@ function getGreeting(user) {
 const user = {
   firstName: 'Daniel',
   lastName: 'Elias',
-  avatarUrl: 'https://teogracia.com/wp-content/themes/teotheme/images/logoteograciaverde.png'
+  avatarUrl: 'src/logoteogracia.png'
 }
 // const element = <div tabIndex="0"></div>;
 
@@ -22,7 +22,6 @@ const user = {
 //   getGreeting(user)
 // );
 const element = <img src={user.avatarUrl}></img>;
-
 
 ReactDOM.render(
   element, 
