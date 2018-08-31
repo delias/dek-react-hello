@@ -1,27 +1,24 @@
 // Hello world example
-// ReactDOM.render(
-//   <h1>Hello, world3 !</h1>,
-//   document.getElementById('root')
-// );
-
-// ReactDOM.render(
-//   element,
-//   document.getElementById('root')
-// );
-
-// example 2
-// const name = 'Daniel Elias';
-// const element = <h2>Hola, {name}</h2>
-
-// ReactDOM.render(
-//   element,
-//   document.getElementById('root')
-// );
-
-// Example 3
 
 function formatName(user) {
   return user.firstName + ' ' + user.lastName;
+}
+
+function getGreeting(user) {
+  if (user) {
+    return React.createElement(
+      'h1',
+      null,
+      'Hello, ',
+      formatName(user),
+      '!'
+    );
+  }
+  return React.createElement(
+    'h1',
+    null,
+    'Hello, Stranger'
+  );
 }
 
 var user = {
@@ -29,12 +26,6 @@ var user = {
   lastName: 'Elias'
 };
 
-var element = React.createElement(
-  'h1',
-  null,
-  'Hola, ',
-  formatName(user),
-  '!'
-);
+var element = getGreeting(user);
 
 ReactDOM.render(element, document.getElementById('root'));
