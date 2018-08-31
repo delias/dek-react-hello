@@ -16,19 +16,23 @@ const user = {
   lastName: 'Elias',
   avatarUrl: 'src/logoteogracia.png'
 }
-// const element = <div tabIndex="0"></div>;
 
 // const element = (
 //   getGreeting(user)
 // );
 // const element = <img src={user.avatarUrl} />;
-const element = (
-  <div>
-    <img src={user.avatarUrl} />
-    <h1>Hello, {formatName(user)}!</h1>
-    <h2>Good to see you here.</h2>
-  </div>
-);
+
+const title = response.potentiallyMaliciousInput;
+// This is safe:
+const element = <h1>{title}</h1>;
+
+// const element = (
+//   <div>
+//     <img src={user.avatarUrl} />
+//     <h1>Hello, {formatName(user)}!</h1>
+//     <h2>Good to see you here.</h2>
+//   </div>
+// );
 
 ReactDOM.render(
   element, 

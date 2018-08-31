@@ -25,28 +25,26 @@ var user = {
   firstName: 'Daniel',
   lastName: 'Elias',
   avatarUrl: 'src/logoteogracia.png'
-  // const element = <div tabIndex="0"></div>;
 
   // const element = (
   //   getGreeting(user)
   // );
   // const element = <img src={user.avatarUrl} />;
-};var element = React.createElement(
-  'div',
+
+};var title = response.potentiallyMaliciousInput;
+// This is safe:
+var element = React.createElement(
+  'h1',
   null,
-  React.createElement('img', { src: user.avatarUrl }),
-  React.createElement(
-    'h1',
-    null,
-    'Hello, ',
-    formatName(user),
-    '!'
-  ),
-  React.createElement(
-    'h2',
-    null,
-    'Good to see you here.'
-  )
+  title
 );
+
+// const element = (
+//   <div>
+//     <img src={user.avatarUrl} />
+//     <h1>Hello, {formatName(user)}!</h1>
+//     <h2>Good to see you here.</h2>
+//   </div>
+// );
 
 ReactDOM.render(element, document.getElementById('root'));
