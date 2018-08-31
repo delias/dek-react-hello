@@ -34,10 +34,13 @@ var user = {
 };var element = React.createElement(
   'div',
   null,
+  React.createElement('img', { src: user.avatarUrl }),
   React.createElement(
     'h1',
     null,
-    'Hello!'
+    'Hello, ',
+    formatName(user),
+    '!'
   ),
   React.createElement(
     'h2',

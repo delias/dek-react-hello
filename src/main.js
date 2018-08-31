@@ -24,7 +24,8 @@ const user = {
 // const element = <img src={user.avatarUrl} />;
 const element = (
   <div>
-    <h1>Hello!</h1>
+    <img src={user.avatarUrl} />
+    <h1>Hello, {formatName(user)}!</h1>
     <h2>Good to see you here.</h2>
   </div>
 );
