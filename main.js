@@ -84,6 +84,16 @@ var user = {
 //   }
 // }
 
-var element = React.createElement(Welcome, { name: 'Daniel' });
+function App() {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(Welcome, { name: 'Daniel' }),
+    React.createElement(Welcome, { name: 'Anna' }),
+    React.createElement(Welcome, { name: 'Gerard' })
+  );
+}
+
+var element = React.createElement(App, null);
 
 ReactDOM.render(element, document.getElementById('root'));

@@ -69,7 +69,17 @@ function Welcome(props) {
 //   }
 // }
 
-const element = <Welcome name="Daniel" />;
+function App() {
+  return (
+    <div>
+      <Welcome name="Daniel" />
+      <Welcome name="Anna" />
+      <Welcome name="Gerard" />
+    </div>
+  )
+}
+
+const element = <App />;
 
 ReactDOM.render(
   element, 
