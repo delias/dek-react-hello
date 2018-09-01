@@ -53,24 +53,37 @@ var user = {
 
   //const element = getGreeting(user);
 
-};function tick() {
-  var element = React.createElement(
-    'div',
+  // function tick() {
+  //   const element = (
+  //     <div>
+  //       <h1>Hello, world!</h1>
+  //       <h2>It is {new Date().toLocaleTimeString()}.</h2>
+  //     </div>
+  //   );
+  //   ReactDOM.render(
+  //     element, 
+  //     document.getElementById('root')
+  //   );
+  // }
+
+  // setInterval(tick, 1000);
+
+};function Welcome(props) {
+  return React.createElement(
+    'h1',
     null,
-    React.createElement(
-      'h1',
-      null,
-      'Hello, world!'
-    ),
-    React.createElement(
-      'h2',
-      null,
-      'It is ',
-      new Date().toLocaleTimeString(),
-      '.'
-    )
+    'Hello, ',
+    props.name,
+    '!'
   );
-  ReactDOM.render(element, document.getElementById('root'));
 }
 
-setInterval(tick, 1000);
+// class Welcome extends React.Component {
+//   render() {
+//     return <h1>Hello, {this.props.name}!</h1>;
+//   }
+// }
+
+var element = React.createElement(Welcome, { name: 'Daniel' });
+
+ReactDOM.render(element, document.getElementById('root'));
