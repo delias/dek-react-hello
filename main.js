@@ -45,6 +45,32 @@ var user = {
   //   </h1>
   // );
 
-};var element = React.createElement('h1', { className: 'greeting' }, 'Hello, world!');
+  // const element = React.createElement(
+  //   'h1',
+  //   {className: 'greeting'},
+  //   'Hello world!'
+  // );
 
-ReactDOM.render(element, document.getElementById('root'));
+  //const element = getGreeting(user);
+
+};function tick() {
+  var element = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Hello, world!'
+    ),
+    React.createElement(
+      'h2',
+      null,
+      'It is ',
+      new Date().toLocaleTimeString(),
+      '.'
+    )
+  );
+  ReactDOM.render(element, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);
