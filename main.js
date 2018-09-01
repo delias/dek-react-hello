@@ -1,97 +1,62 @@
-// Hello world example
 
-function formatName(user) {
-  return user.firstName + ' ' + user.lastName;
+function formatDate(date) {
+  return date.toLocaleDateString();
 }
 
-function getGreeting(user) {
-  if (user) {
-    return React.createElement(
-      'h1',
-      null,
-      'Hello, ',
-      formatName(user),
-      '!'
-    );
+function Avatar(props) {
+  return React.createElement("img", {
+    className: "Avatar",
+    src: props.user.avatarUrl,
+    alt: props.user.name
+  });
+}
+
+function UserInfo(props) {
+  return React.createElement(
+    "div",
+    { className: "UserInfo" },
+    React.createElement(Avatar, { user: props.user }),
+    React.createElement(
+      "div",
+      { className: "UserInfo-name" },
+      props.user.name
+    )
+  );
+}
+
+function Comment(props) {
+  return React.createElement(
+    "div",
+    { className: "Comment" },
+    React.createElement(UserInfo, { user: props.author }),
+    React.createElement(
+      "div",
+      { className: "Comment-text" },
+      props.text
+    ),
+    React.createElement(
+      "div",
+      { className: "Comment-data" },
+      formatDate(props.date)
+    )
+  );
+}
+
+var comment = {
+  date: new Date(),
+  text: 'Esto es un comentario',
+  author: {
+    name: 'Daniel Elias',
+    avatarUrl: 'src/logoteogracia.png'
   }
-  return React.createElement(
-    'h1',
-    null,
-    'Hello, Stranger'
-  );
-}
-
-var user = {
-  firstName: 'Daniel',
-  lastName: 'Elias',
-  avatarUrl: 'src/logoteogracia.png'
-
-  // const element = (
-  //   getGreeting(user)
-  // );
-  // const element = <img src={user.avatarUrl} />;
-
-  // const element = (
-  //   <div>
-  //     <img src={user.avatarUrl} />
-  //     <h1>Hello, {formatName(user)}!</h1>
-  //     <h2>Good to see you here.</h2>
-  //   </div>
-  // );
-
-  // const element = (
-  //   <h1 className="greeting">
-  //     Hello, world!
-  //   </h1>
-  // );
-
-  // const element = React.createElement(
-  //   'h1',
-  //   {className: 'greeting'},
-  //   'Hello world!'
-  // );
-
-  //const element = getGreeting(user);
-
-  // function tick() {
-  //   const element = (
-  //     <div>
-  //       <h1>Hello, world!</h1>
-  //       <h2>It is {new Date().toLocaleTimeString()}.</h2>
-  //     </div>
-  //   );
-  //   ReactDOM.render(
-  //     element, 
-  //     document.getElementById('root')
-  //   );
-  // }
-
-  // setInterval(tick, 1000);
-
-};function Welcome(props) {
-  return React.createElement(
-    'h1',
-    null,
-    'Hello, ',
-    props.name,
-    '!'
-  );
-}
-
-// class Welcome extends React.Component {
-//   render() {
-//     return <h1>Hello, {this.props.name}!</h1>;
-//   }
-// }
+};
 
 function App() {
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(Welcome, { name: 'Daniel' }),
-    React.createElement(Welcome, { name: 'Anna' }),
-    React.createElement(Welcome, { name: 'Gerard' })
-  );
+  return React.createElement(Comment, {
+    date: comment.date,
+    text: comment.text,
+    author: comment.author
+  });
 }
 
 var element = React.createElement(App, null);
