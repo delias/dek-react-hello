@@ -1,3 +1,7 @@
+function FormattedDate(props) {
+  return <h2>Son las: {props.date.toLocaleTimeString()}.</h2>;
+}
+
 class Clock extends React.Component {
   constructor(props) {
     super(props);
@@ -19,21 +23,32 @@ class Clock extends React.Component {
     this.setState({
       date: new Date()
     });
+
   }
 
   render() {
     return (
       <div>
         <h1>Hola, Mundo!</h1>
-        <h2>Son las {this.state.date.toLocaleTimeString()}.
-        </h2>
+        {/* <h2>Son las {this.state.date.toLocaleTimeString()}.</h2> */}
+        <FormattedDate date={this.state.date} />
       </div>
     );
   }
 }
 
+function App() {
+  return (
+    <div>
+      <Clock />
+      <Clock />
+      <Clock />
+    </div>
+  );
+}
+
 ReactDOM.render(
-  <Clock />,
+  <App />,
   document.getElementById('root')
 );
 

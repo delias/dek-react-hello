@@ -6,6 +6,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function FormattedDate(props) {
+  return React.createElement(
+    'h2',
+    null,
+    'Son las: ',
+    props.date.toLocaleTimeString(),
+    '.'
+  );
+}
+
 var Clock = function (_React$Component) {
   _inherits(Clock, _React$Component);
 
@@ -50,13 +60,7 @@ var Clock = function (_React$Component) {
           null,
           'Hola, Mundo!'
         ),
-        React.createElement(
-          'h2',
-          null,
-          'Son las ',
-          this.state.date.toLocaleTimeString(),
-          '.'
-        )
+        React.createElement(FormattedDate, { date: this.state.date })
       );
     }
   }]);
@@ -64,7 +68,17 @@ var Clock = function (_React$Component) {
   return Clock;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Clock, null), document.getElementById('root'));
+function App() {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(Clock, null),
+    React.createElement(Clock, null),
+    React.createElement(Clock, null)
+  );
+}
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 
 /**
  * Let’s quickly recap what’s going on and the order in which the methods are called:
