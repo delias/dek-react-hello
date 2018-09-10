@@ -48,7 +48,7 @@ ReactDOM.render(
 
 
 // Conditional Rendering
-/*
+
 function UserGreeting(props) {
   return <h1>Welcome back!</h1>
 }
@@ -64,7 +64,7 @@ function Greeting(props) {
   }
   else return <GuestGreeting />
 }
-*/
+
 /*
 ReactDOM.render(
   <Greeting isLoggedIn={true} />,
@@ -72,7 +72,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 */
-/*
+
 // Element Variables
 function LoginButton(props) {
   return (
@@ -105,32 +105,43 @@ class LoginControl extends React.Component {
     this.setState({isLoggedIn: false});
   }
 
+  // render() {
+  //   const isLoggedIn = this.state.isLoggedIn;
+  //   let button;
+
+  //   if (isLoggedIn) {
+  //     button = <LogoutButton onClick={this.handleLogoutClick} />;
+  //   } else {
+  //     button = <LoginButton onClick={this.handleLoginClick} />;
+  //   }
+
+  //   return(
+  //     <div>
+  //       <Greeting isLoggedIn={isLoggedIn} />
+  //       {button}
+  //     </div>
+  //   );
+  // }
+
+  // Inline If-Else with Conditional Operator
   render() {
     const isLoggedIn = this.state.isLoggedIn;
-    let button;
-
-    if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
-    }
-
-    return(
+    return (
       <div>
-        <Greeting isLoggedIn={isLoggedIn} />
-        {button}
+        The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
       </div>
     );
   }
+
 }
 
 ReactDOM.render(
   <LoginControl />,
   document.getElementById('root')
 );
-*/
-// Inline if with Logical && Operator
 
+// Inline if with Logical && Operator
+/*
 function Mailbox(props) {
   const unreadMessages = props.unreadMessages;
   return (
@@ -151,3 +162,5 @@ ReactDOM.render(
   <Mailbox unreadMessages={messages} />,
   document.getElementById('root')
 );
+*/
+
