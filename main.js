@@ -1,46 +1,74 @@
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Toggle = function (_React$Component) {
-  _inherits(Toggle, _React$Component);
-
-  function Toggle(props) {
-    _classCallCheck(this, Toggle);
-
-    var _this = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props));
-
-    _this.state = { isToggleOn: true };
-    //This binding is necessary to make this worl in the callback
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
+/*
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    //This binding is necessary to make this world in the callback
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  _createClass(Toggle, [{
-    key: 'handleClick',
-    value: function handleClick() {
-      this.setState(function (prevState) {
-        return {
-          isToggleOn: !prevState.isToggleOn
-        };
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'button',
-        { onClick: this.handleClick },
-        this.state.isToggleOn ? 'ON' : 'OFF'
-      );
-    }
-  }]);
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
 
-  return Toggle;
-}(React.Component);
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+      {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+*/
+/*
+class LoggingButton extends React.Component {
+  // This syntax ensures `this` is bound within handleClick.
+  // Warning: this is *experimental* syntax.
+  handleClick = () => {
+    console.log('this is:', this);
+  }
 
-ReactDOM.render(React.createElement(Toggle, null), document.getElementById('root'));
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        Click me
+      </button>
+    );
+  }
+}
+*/
+/*
+ReactDOM.render(
+  <Toggle />,
+  document.getElementById('root')
+);
+*/
+
+// Conditional Rendering
+
+function UserGreeting(props) {
+  return React.createElement(
+    'h1',
+    null,
+    'Welcome back!'
+  );
+}
+
+function GuestGreeting(props) {
+  return React.createElement(
+    'h1',
+    null,
+    'Please sign up'
+  );
+}
+
+function Greeting(props) {
+  var isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return React.createElement(UserGreeting, null);
+  } else return React.createElement(GuestGreeting, null);
+}
+
+ReactDOM.render(React.createElement(Greeting, { isLoggedIn: false }), document.getElementById('root'));
