@@ -1,11 +1,3 @@
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 /*
 class Toggle extends React.Component {
   constructor(props) {
@@ -55,29 +47,23 @@ ReactDOM.render(
 */
 
 // Conditional Rendering
-
+/*
 function UserGreeting(props) {
-  return React.createElement(
-    'h1',
-    null,
-    'Welcome back!'
-  );
+  return <h1>Welcome back!</h1>
 }
 
 function GuestGreeting(props) {
-  return React.createElement(
-    'h1',
-    null,
-    'Please sign up'
-  );
+  return <h1>Please sign up</h1>
 }
 
 function Greeting(props) {
-  var isLoggedIn = props.isLoggedIn;
+  const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn) {
-    return React.createElement(UserGreeting, null);
-  } else return React.createElement(GuestGreeting, null);
+    return <UserGreeting />
+  }
+  else return <GuestGreeting />
 }
+*/
 /*
 ReactDOM.render(
   <Greeting isLoggedIn={true} />,
@@ -85,69 +71,85 @@ ReactDOM.render(
   document.getElementById('root')
 );
 */
-
+/*
 // Element Variables
 function LoginButton(props) {
-  return React.createElement(
-    'button',
-    { onClick: props.onClick },
-    'Login'
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
   );
 }
 function LogoutButton(props) {
-  return React.createElement(
-    'button',
-    { onClick: props.onClick },
-    'Logout'
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
   );
 }
 
-var LoginControl = function (_React$Component) {
-  _inherits(LoginControl, _React$Component);
-
-  function LoginControl(props) {
-    _classCallCheck(this, LoginControl);
-
-    var _this = _possibleConstructorReturn(this, (LoginControl.__proto__ || Object.getPrototypeOf(LoginControl)).call(this, props));
-
-    _this.handleLoginClick = _this.handleLoginClick.bind(_this);
-    _this.handleLogoutClick = _this.handleLogoutClick.bind(_this);
-    _this.state = { isLoggedIn: false };
-    return _this;
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
   }
 
-  _createClass(LoginControl, [{
-    key: 'handleLoginClick',
-    value: function handleLoginClick() {
-      this.setState({ isLoggedIn: true });
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
     }
-  }, {
-    key: 'handleLogoutClick',
-    value: function handleLogoutClick() {
-      this.setState({ isLoggedIn: false });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isLoggedIn = this.state.isLoggedIn;
-      var button = void 0;
 
-      if (isLoggedIn) {
-        button = React.createElement(LogoutButton, { onClick: this.handleLogoutClick });
-      } else {
-        button = React.createElement(LoginButton, { onClick: this.handleLoginClick });
-      }
+    return(
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
 
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(Greeting, { isLoggedIn: isLoggedIn }),
-        button
-      );
-    }
-  }]);
+ReactDOM.render(
+  <LoginControl />,
+  document.getElementById('root')
+);
+*/
+// Inline if with Logical && Operator
 
-  return LoginControl;
-}(React.Component);
+function Mailbox(props) {
+  var unreadMessages = props.unreadMessages;
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Hello!'
+    ),
+    unreadMessages.length > 0 && React.createElement(
+      'h2',
+      null,
+      'You have ',
+      unreadMessages.length,
+      ' unread messages.'
+    )
+  );
+}
 
-ReactDOM.render(React.createElement(LoginControl, null), document.getElementById('root'));
+var messages = ['React', 'Re: React', 'Re:Re: React'];
+
+ReactDOM.render(React.createElement(Mailbox, { unreadMessages: messages }), document.getElementById('root'));

@@ -48,7 +48,7 @@ ReactDOM.render(
 
 
 // Conditional Rendering
-
+/*
 function UserGreeting(props) {
   return <h1>Welcome back!</h1>
 }
@@ -64,6 +64,7 @@ function Greeting(props) {
   }
   else return <GuestGreeting />
 }
+*/
 /*
 ReactDOM.render(
   <Greeting isLoggedIn={true} />,
@@ -71,7 +72,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 */
-
+/*
 // Element Variables
 function LoginButton(props) {
   return (
@@ -125,5 +126,28 @@ class LoginControl extends React.Component {
 
 ReactDOM.render(
   <LoginControl />,
+  document.getElementById('root')
+);
+*/
+// Inline if with Logical && Operator
+
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+  );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+ReactDOM.render(
+  <Mailbox unreadMessages={messages} />,
   document.getElementById('root')
 );
