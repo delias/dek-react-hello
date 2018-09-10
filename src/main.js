@@ -48,7 +48,7 @@ ReactDOM.render(
 
 
 // Conditional Rendering
-
+/*
 function UserGreeting(props) {
   return <h1>Welcome back!</h1>
 }
@@ -64,7 +64,7 @@ function Greeting(props) {
   }
   else return <GuestGreeting />
 }
-
+*/
 /*
 ReactDOM.render(
   <Greeting isLoggedIn={true} />,
@@ -74,6 +74,7 @@ ReactDOM.render(
 */
 
 // Element Variables
+/*
 function LoginButton(props) {
   return (
     <button onClick={props.onClick}>
@@ -139,7 +140,7 @@ ReactDOM.render(
   <LoginControl />,
   document.getElementById('root')
 );
-
+*/
 // Inline if with Logical && Operator
 /*
 function Mailbox(props) {
@@ -164,3 +165,46 @@ ReactDOM.render(
 );
 */
 
+// Preventing Component from Rendering
+
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(prevState => ({
+      showWarning: !prevState.showWarning
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <WarningBanner warn={this.state.showWarning} />
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        </button>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Page />,
+  document.getElementById('root')
+);
