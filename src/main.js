@@ -13,7 +13,8 @@ ReactDOM.render(
 );
  */
 
- function NumerList(props) {
+//  Basic List Component
+/*  function NumerList(props) {
    const numbers = props.numbers;
    const listItems = numbers.map((number) => <li>{number}</li>);
    return (
@@ -25,4 +26,21 @@ ReactDOM.render(
  ReactDOM.render(
    <NumerList numbers={numbers} />,
    document.getElementById('root')
+ ); */
+
+ function NumerList(props) {
+   const numbers = props.numbers;
+   const listItems = numbers.map((number) => 
+    <li key={number.toString()}>
+      {number}
+    </li>
+   );
+   return (
+     <ul>{listItems}</ul>
+   );
+ }
+ const numbers = [1, 2, 3, 4, 5];
+ ReactDOM.render(
+  <NumerList numbers={numbers}/>,
+  document.getElementById('root')
  );
