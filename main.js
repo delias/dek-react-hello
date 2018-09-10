@@ -3,17 +3,31 @@ const doubled = numbers.map((number) => number * 2);
 console.log(doubled); */
 
 // Rendering Multiple Components
-var numbers = [1, 2, 3, 4, 5];
-var listItems = numbers.map(function (number) {
-  return React.createElement(
-    'li',
-    null,
-    number
-  );
-});
+/* 
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) => <li>{number}</li>);
 
-ReactDOM.render(React.createElement(
-  'ul',
-  null,
-  listItems
-), document.getElementById('root'));
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById('root')
+);
+ */
+
+function NumerList(props) {
+  var numbers = props.numbers;
+  var listItems = numbers.map(function (number) {
+    return React.createElement(
+      'li',
+      null,
+      number
+    );
+  });
+  return React.createElement(
+    'ul',
+    null,
+    listItems
+  );
+}
+
+var numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(React.createElement(NumerList, { numbers: numbers }), document.getElementById('root'));
