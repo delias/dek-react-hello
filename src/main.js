@@ -48,20 +48,22 @@ ReactDOM.render(
  );
  */
 
+//  Extracting Components with Keys
+
 function ListItems(props) {
-  const value = props.value;
+  //Correct! there is no need to specify the key here:
   return (
-    //Wrong! there is no need to specify the key here:
-    <li key={value.toString()}>
-      {value}
+    <li>
+      {props.value}
     </li>
   );
 }
+
 function NumerList(props) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) => 
-    //Wrong! The key should have been specified
-    <ListItems value={value} />
+    //Correct! key should  be specified inside
+    <ListItems key={number.toString()} value={number} />
   );
   return (
     <ul>
