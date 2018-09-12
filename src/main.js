@@ -28,6 +28,8 @@ ReactDOM.render(
    document.getElementById('root')
  ); */
 
+//  Assigning a key to our list
+/* 
  function NumerList(props) {
    const numbers = props.numbers;
    const listItems = numbers.map((number) => 
@@ -44,3 +46,32 @@ ReactDOM.render(
   <NumerList numbers={numbers}/>,
   document.getElementById('root')
  );
+ */
+
+function ListItems(props) {
+  const value = props.value;
+  return (
+    //Wrong! there is no need to specify the key here:
+    <li key={value.toString()}>
+      {value}
+    </li>
+  );
+}
+function NumerList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) => 
+    //Wrong! The key should have been specified
+    <ListItems value={value} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumerList numbers={numbers} />,
+  document.getElementById('root')
+);
