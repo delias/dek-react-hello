@@ -155,23 +155,63 @@ ReactDOM.render(
 
 // Forms
 // Controlled Components
+/* 
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
 
-var NameForm = function (_React$Component) {
-  _inherits(NameForm, _React$Component);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  function NameForm(props) {
-    _classCallCheck(this, NameForm);
+  handleChange(event) {
+    // this.setState({value: event.target.value});
+    this.setState({value: event.target.value.toUpperCase()});
+  }
 
-    var _this = _possibleConstructorReturn(this, (NameForm.__proto__ || Object.getPrototypeOf(NameForm)).call(this, props));
+  handleSubmit(event) {
+    alert( 'Un nombre fue ingresado: ' + this.state.value);
+    event.preventDefault();
+  }
 
-    _this.state = { value: '' };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <NameForm />,
+  document.getElementById('root')
+);
+ */
+
+// The textarea Tag
+
+var EssayForm = function (_React$Component) {
+  _inherits(EssayForm, _React$Component);
+
+  function EssayForm(props) {
+    _classCallCheck(this, EssayForm);
+
+    var _this = _possibleConstructorReturn(this, (EssayForm.__proto__ || Object.getPrototypeOf(EssayForm)).call(this, props));
+
+    _this.state = { value: 'Por favor, escriba un ensayo acerca de su elemente DOM favorito' };
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
-  _createClass(NameForm, [{
+  _createClass(EssayForm, [{
     key: 'handleChange',
     value: function handleChange(event) {
       this.setState({ value: event.target.value });
@@ -179,7 +219,7 @@ var NameForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      alert('Un nombre fue ingresado: ' + this.state.value);
+      alert('Un ensayo fue agregado: ' + this.state.value);
       event.preventDefault();
     }
   }, {
@@ -191,15 +231,15 @@ var NameForm = function (_React$Component) {
         React.createElement(
           'label',
           null,
-          'Name:',
-          React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange })
+          'Ensayo:',
+          React.createElement('textarea', { value: this.state.value, onChange: this.handleChange })
         ),
-        React.createElement('input', { type: 'submit', value: 'Submit' })
+        React.createElement('input', { type: 'submit', value: 'Enviar' })
       );
     }
   }]);
 
-  return NameForm;
+  return EssayForm;
 }(React.Component);
 
-ReactDOM.render(React.createElement(NameForm, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(EssayForm, null), document.getElementById('root'));
