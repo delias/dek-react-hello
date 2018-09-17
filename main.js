@@ -1,5 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -234,69 +236,109 @@ ReactDOM.render(
  */
 
 // The select Tag
+/* 
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'coco'};
 
-var FlavorForm = function (_React$Component) {
-  _inherits(FlavorForm, _React$Component);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  function FlavorForm(props) {
-    _classCallCheck(this, FlavorForm);
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
 
-    var _this = _possibleConstructorReturn(this, (FlavorForm.__proto__ || Object.getPrototypeOf(FlavorForm)).call(this, props));
+  handleSubmit(event) {
+    alert('Tu sabor favorito es: ' + this.state.value);
+    event.preventDefault()
+  }
 
-    _this.state = { value: 'coco' };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Escoge tu sabor favorito: 
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="uva">Uva</option>
+            <option value="limón">Limón</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Enviar" />
+      </form>
+    );
+  }
+}
 
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
+ReactDOM.render(
+  <FlavorForm />,
+  document.getElementById('root')
+);
+ */
+
+// The file input Tag
+// Handling Multiple Inputs
+
+var Reservation = function (_React$Component) {
+  _inherits(Reservation, _React$Component);
+
+  function Reservation(props) {
+    _classCallCheck(this, Reservation);
+
+    var _this = _possibleConstructorReturn(this, (Reservation.__proto__ || Object.getPrototypeOf(Reservation)).call(this, props));
+
+    _this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
+
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
     return _this;
   }
 
-  _createClass(FlavorForm, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState({ value: event.target.value });
+  _createClass(Reservation, [{
+    key: "handleInputChange",
+    value: function handleInputChange(event) {
+      var target = event.target;
+      var value = target.type === 'checkbox' ? target.checked : target.value;
+      var name = target.name;
+
+      this.setState(_defineProperty({}, name, value));
     }
   }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      alert('Tu sabor favorito es: ' + this.state.value);
-      event.preventDefault();
-    }
-  }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return React.createElement(
-        'form',
-        { onSubmit: this.handleSubmit },
+        "form",
+        null,
         React.createElement(
-          'label',
+          "label",
           null,
-          'Escoge tu sabor favorito:',
-          React.createElement(
-            'select',
-            { value: this.state.value, onChange: this.handleChange },
-            React.createElement(
-              'option',
-              { value: 'uva' },
-              'Uva'
-            ),
-            React.createElement(
-              'option',
-              { value: 'lim\xF3n' },
-              'Lim\xF3n'
-            ),
-            React.createElement(
-              'option',
-              { value: 'mango' },
-              'Mango'
-            )
-          )
+          "Is going:",
+          React.createElement("input", {
+            name: "isGoing",
+            type: "checkbox",
+            checked: this.state.isGoing,
+            onChange: this.handleInputChange })
         ),
-        React.createElement('input', { type: 'submit', value: 'Enviar' })
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          "Number of guests:",
+          React.createElement("input", {
+            name: "numberOfGuests",
+            type: "number",
+            value: this.state.numberOfGuests,
+            onChange: this.handleInputChange })
+        )
       );
     }
   }]);
 
-  return FlavorForm;
+  return Reservation;
 }(React.Component);
 
-ReactDOM.render(React.createElement(FlavorForm, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(Reservation, null), document.getElementById('root'));
