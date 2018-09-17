@@ -80,7 +80,7 @@ ReactDOM.render(
  */
 
 //  Keys Must Only Be Unique Among Siblings
-
+/* 
 function Blog(props) {
   const sidebar = (
     <ul>
@@ -113,5 +113,33 @@ const posts = [
 
 ReactDOM.render(
   <Blog posts={posts} />,
+  document.getElementById('root')
+);
+ */
+
+function ListItem(props) {
+  //Correct! there is no need to specify the key here:
+  return (
+    <li>
+      {props.value}
+    </li>
+  );
+}
+
+function NumerList(props) {
+  const numbers = props.numbers;
+  return (
+    <ul>
+      {numbers.map((number) => 
+        <ListItem  key={number.toString()} 
+                   value={number} />
+      )}
+    </ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumerList numbers={numbers} />,
   document.getElementById('root')
 );
