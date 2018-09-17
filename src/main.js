@@ -187,7 +187,7 @@ ReactDOM.render(
  */
 
 // The textarea Tag
-
+/* 
 class EssayForm extends React.Component {
   constructor(props) {
     super(props);
@@ -221,5 +221,48 @@ class EssayForm extends React.Component {
 
 ReactDOM.render(
   <EssayForm />,
+  document.getElementById('root')
+);
+ */
+
+// The select Tag
+
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'coco'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('Tu sabor favorito es: ' + this.state.value);
+    event.preventDefault()
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Escoge tu sabor favorito: 
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="uva">Uva</option>
+            <option value="limón">Limón</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Enviar" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <FlavorForm />,
   document.getElementById('root')
 );
