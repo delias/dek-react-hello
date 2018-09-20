@@ -1,7 +1,5 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -280,65 +278,113 @@ ReactDOM.render(
 
 // The file input Tag
 // Handling Multiple Inputs
-
-var Reservation = function (_React$Component) {
-  _inherits(Reservation, _React$Component);
-
-  function Reservation(props) {
-    _classCallCheck(this, Reservation);
-
-    var _this = _possibleConstructorReturn(this, (Reservation.__proto__ || Object.getPrototypeOf(Reservation)).call(this, props));
-
-    _this.state = {
+/* 
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       isGoing: true,
       numberOfGuests: 2
     };
 
-    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      <form>
+        <label>
+          Is going:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Number of guests:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} />
+        </label>
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Reservation />,
+  document.getElementById('root')
+);
+ */
+
+/* Lifting State Up */
+
+function BoilingVerdict(props) {
+  if (props.celcius >= 100) {
+    return React.createElement(
+      'p',
+      null,
+      'The water would boil.'
+    );
+  }
+  return React.createElement(
+    'p',
+    null,
+    'The water would not boil.'
+  );
+}
+
+var Calculator = function (_React$Component) {
+  _inherits(Calculator, _React$Component);
+
+  function Calculator(props) {
+    _classCallCheck(this, Calculator);
+
+    var _this = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.state = { temperature: '' };
     return _this;
   }
 
-  _createClass(Reservation, [{
-    key: "handleInputChange",
-    value: function handleInputChange(event) {
-      var target = event.target;
-      var value = target.type === 'checkbox' ? target.checked : target.value;
-      var name = target.name;
-
-      this.setState(_defineProperty({}, name, value));
+  _createClass(Calculator, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState({ temperature: e.target.value });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
+      var temperature = this.state.temperature;
       return React.createElement(
-        "form",
+        'fieldset',
         null,
         React.createElement(
-          "label",
+          'legend',
           null,
-          "Is going:",
-          React.createElement("input", {
-            name: "isGoing",
-            type: "checkbox",
-            checked: this.state.isGoing,
-            onChange: this.handleInputChange })
+          'Enter temperature in Celsius.'
         ),
-        React.createElement("br", null),
-        React.createElement(
-          "label",
-          null,
-          "Number of guests:",
-          React.createElement("input", {
-            name: "numberOfGuests",
-            type: "number",
-            value: this.state.numberOfGuests,
-            onChange: this.handleInputChange })
-        )
+        React.createElement('input', { value: temperature, onChange: this.handleChange }),
+        React.createElement(BoilingVerdict, { celcius: parseFloat(temperature) })
       );
     }
   }]);
 
-  return Reservation;
+  return Calculator;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Reservation, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(Calculator, null), document.getElementById('root'));

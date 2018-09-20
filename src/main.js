@@ -270,7 +270,7 @@ ReactDOM.render(
 
 // The file input Tag
 // Handling Multiple Inputs
-
+/* 
 class Reservation extends React.Component {
   constructor(props) {
     super(props);
@@ -319,5 +319,43 @@ class Reservation extends React.Component {
 
 ReactDOM.render(
   <Reservation />,
+  document.getElementById('root')
+);
+ */
+
+/* Lifting State Up */
+
+function BoilingVerdict(props) {
+  if (props.celcius >= 100) {
+    return <p>The water would boil.</p>
+  }
+  return <p>The water would not boil.</p>
+}
+
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {temperature: ''};
+  }
+  handleChange(e) {
+    this.setState({temperature: e.target.value});
+  }
+  render(){
+    const temperature = this.state.temperature;
+    return (
+      <fieldset>
+        <legend>
+          Enter temperature in Celsius.
+        </legend>
+        <input value={temperature} onChange={this.handleChange} />
+        <BoilingVerdict celcius={parseFloat(temperature)} />
+      </fieldset>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Calculator />,
   document.getElementById('root')
 );
