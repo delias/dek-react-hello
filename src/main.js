@@ -362,7 +362,7 @@ ReactDOM.render(
  */
 
 /* Adding a Second Input */
-
+/* 
 const scaleNames = {
   c: 'Celsius',
   f: 'Fahrenheit'
@@ -453,5 +453,28 @@ class Calculator extends React.Component {
 
 ReactDOM.render(
   <Calculator />,
+  document.getElementById('root')
+);
+ */
+
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color} >
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title"> Welcome</h1>
+      <p className="Dialog-message">Thank you for visiting our spacecraft!</p>
+    </FancyBorder>
+  );
+}
+
+ReactDOM.render(
+  <WelcomeDialog />,
   document.getElementById('root')
 );
