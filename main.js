@@ -456,30 +456,94 @@ ReactDOM.render(
   document.getElementById('root')
 );
  */
-
+/* 
 function FancyBorder(props) {
-  return React.createElement(
-    "div",
-    { className: 'FancyBorder FancyBorder-' + props.color },
-    props.children
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color} >
+      {props.children}
+    </div>
   );
 }
 
 function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title"> Welcome</h1>
+      <p className="Dialog-message">Thank you for visiting our spacecraft!</p>
+    </FancyBorder>
+  );
+}
+
+ReactDOM.render(
+  <WelcomeDialog />,
+  document.getElementById('root')
+);
+ */
+/* 
+function Contacts() {
+  return <div className="Contacts" />;
+}
+
+function Chat() {
+  return <div className="Chat" />;
+}
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <SplitPane 
+      left={<Contacts />}
+      right={<Chat />}
+    />
+  );
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+ */
+
+function Contacts() {
+  return React.createElement("div", { className: "Contacts" });
+}
+
+function Chat() {
+  return React.createElement("div", { className: "Chat" });
+}
+
+function SplitPane(props) {
   return React.createElement(
-    FancyBorder,
-    { color: "blue" },
+    "div",
+    { className: "SplitPane" },
     React.createElement(
-      "h1",
-      { className: "Dialog-title" },
-      " Welcome"
+      "div",
+      { className: "SplitPane-left" },
+      props.left
     ),
     React.createElement(
-      "p",
-      { className: "Dialog-message" },
-      "Thank you for visiting our spacecraft!"
+      "div",
+      { className: "SplitPane-right" },
+      props.right
     )
   );
 }
 
-ReactDOM.render(React.createElement(WelcomeDialog, null), document.getElementById('root'));
+function App() {
+  return React.createElement(SplitPane, {
+    left: React.createElement(Contacts, null),
+    right: React.createElement(Chat, null) });
+}
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
