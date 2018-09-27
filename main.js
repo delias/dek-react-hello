@@ -514,36 +514,75 @@ ReactDOM.render(
   document.getElementById('root')
 );
  */
-
+/* 
 function Contacts() {
-  return React.createElement("div", { className: "Contacts" });
+  return <div className="Contacts" />;
 }
 
 function Chat() {
-  return React.createElement("div", { className: "Chat" });
+  return <div className="Chat" />;
 }
 
 function SplitPane(props) {
-  return React.createElement(
-    "div",
-    { className: "SplitPane" },
-    React.createElement(
-      "div",
-      { className: "SplitPane-left" },
-      props.left
-    ),
-    React.createElement(
-      "div",
-      { className: "SplitPane-right" },
-      props.right
-    )
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
   );
 }
 
 function App() {
-  return React.createElement(SplitPane, {
-    left: React.createElement(Contacts, null),
-    right: React.createElement(Chat, null) });
+  return (
+    <SplitPane
+      left={
+        <Contacts />
+      }
+      right={
+        <Chat />
+      } />
+  );
 }
 
-ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+ */
+
+// Specialization
+
+function FancyBorder(props) {
+  return React.createElement(
+    "div",
+    { className: 'FancyBorder FancyBorder-' + props.color },
+    props.children
+  );
+}
+
+function Dialog(props) {
+  return React.createElement(
+    FancyBorder,
+    { color: "blue" },
+    React.createElement(
+      "h1",
+      { className: "Dialog-title" },
+      props.title
+    ),
+    React.createElement(
+      "p",
+      { className: "Dialog-message" },
+      props.message
+    )
+  );
+}
+
+function WelcomeDialog() {
+  return React.createElement(Dialog, { title: "Welcome", message: "Thank you for visiting our spacecraft!" });
+}
+
+ReactDOM.render(React.createElement(WelcomeDialog, null), document.getElementById('root'));

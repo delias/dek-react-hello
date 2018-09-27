@@ -44,37 +44,21 @@ html, body, #root {
   background: pink;
 }
  */
-
-html, body, #root {
-  width: 100%;
-  height: 100%;
+ 
+ .FancyBorder {
+  padding: 10px 10px;
+  border: 10px solid;
 }
 
-.SplitPane {
-  width: 100%;
-  height: 100%;
+.FancyBorder-blue {
+  border-color: blue;
 }
 
-.SplitPane-left {
-  float: left;
-  width: 30%;
-  height: 100%;
+.Dialog-title {
+  margin: 0;
+  font-family: sans-serif;
 }
 
-.SplitPane-right {
-  float: left;
-  width: 70%;
-  height: 100%;
-}
-
-.Contacts {
-  width: 100%;
-  height: 100%; 
-  background: lightblue;
-}
-
-.Chat {
-  width: 100%;
-  height: 100%; 
-  background: pink;
+.Dialog-message {
+  font-size: larger;
 }
