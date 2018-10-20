@@ -618,6 +618,8 @@ ReactDOM.render(
 );
  */
 
+ /* Composition vs Inheritance */
+/* 
 function FancyBorder(props) {
   return (
     <div className={'FancyBorder FancyBorder-' + props.color}>
@@ -653,7 +655,7 @@ class SignUpDialog extends React.Component {
       <Dialog title="Mars Exploration Program"
               message="How should we refer to you?">
         <input value={this.state.login}
-               onChange={this.handleChange} />
+               onChange={this.handleChange} placeholder= 'Nombre' />
         <button onClick={this.handleSignUp}>
           Sign Me Up!
         </button>
@@ -672,5 +674,44 @@ class SignUpDialog extends React.Component {
 
 ReactDOM.render(
   <SignUpDialog />,
+  document.getElementById('root')
+);
+ */
+function Contacts() {
+  return <div className="Contacts" />;
+}
+
+function Chat() {
+  return <div className="Chat" />;
+}
+
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <SplitPane 
+      left={
+        <Contacts />
+      }
+      right={
+        <Chat />
+      }
+    />
+  );
+}
+
+ReactDOM.render(
+  <App />,
   document.getElementById('root')
 );
