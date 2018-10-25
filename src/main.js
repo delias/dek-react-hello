@@ -677,6 +677,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
  */
+/* 
 function Contacts() {
   return <div className="Contacts" />;
 }
@@ -715,3 +716,126 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+ */
+
+/* Thinking in React */
+
+class ChapRow extends React.Component {
+  render() {
+    const item = this.props.item;
+    return (
+      <tr>
+        <td>{item.school}</td>
+        <td>{item.chaplain}</td>
+      </tr>
+    );
+  }
+}
+
+class ChapTable extends React.Component {
+  render() {
+    const filterText = this.props.filterText;
+    const rows = [];
+    this.props.items.forEach((item) => {
+      if (item.school.toLowerCase().indexOf(filterText) === -1 && item.chaplain.toLowerCase().indexOf(filterText) === -1) {
+        return;
+      }
+      rows.push(
+        <ChapRow
+          item={item}
+          key={item.school}
+        />
+      );
+    });
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>School</th>
+            <th>Chaplain</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
+}
+
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+  
+  handleFilterTextChange(e) {
+    this.props.onFilterTextChange(e.target.value);
+  }
+  
+  render() {
+    return (
+      <form>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={this.props.filterText}
+          onChange={this.handleFilterTextChange}
+        />
+      </form>
+    );
+  }
+}
+
+class FilterableChapTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: '',
+    };
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+
+  handleFilterTextChange(filterText) {
+    this.setState({
+      filterText: filterText
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar
+          filterText={this.state.filterText}
+          onFilterTextChange={this.handleFilterTextChange}
+        />
+        <ChapTable
+          items={this.props.items}
+          filterText={this.state.filterText}
+        />
+      </div>
+    );
+  }
+}
+
+const CHAP_APP = [
+  {school: 'Bega/Tathra Community Chaplaincy', chaplain: 'Darryl Flaherty'},
+  {school: 'Vardys Road Public School', chaplain: 'Daniel Tuckwell'},
+  {school: 'Test Public School', chaplain: 'Liza Fox'},
+  {school: 'Helensburgh Public School', chaplain: 'Nina Sampson'},
+  {school: 'Miranda Public School', chaplain: 'Tristan Bray'},
+  {school: 'Illawong Public School', chaplain: 'Jo Tsangarides'},
+  {school: 'Eden Marine High School', chaplain: 'Darryl Flaherty'},
+  {school: 'Drummond Memorial Public School', chaplain: ''},
+  {school: 'Corrimal High School', chaplain: 'Leanne Begg'},
+  {school: 'Avoca Beach Public School', chaplain: 'Felicity Robinson'},
+  {school: 'Corowa Public School', chaplain: 'Wendy Thompson'},
+  {school: 'Cumnock Public School', chaplain: 'Alison Nelson'},
+];
+
+ReactDOM.render(
+  <FilterableChapTable items={CHAP_APP} />,
+  document.getElementById('container')
+);
+
+// {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}

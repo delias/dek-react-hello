@@ -1,3 +1,11 @@
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 /* const numbers = [1,2,3,4,5];
 const doubled = numbers.map((number) => number * 2);
 console.log(doubled); */
@@ -677,36 +685,221 @@ ReactDOM.render(
   document.getElementById('root')
 );
  */
+/* 
 function Contacts() {
-  return React.createElement("div", { className: "Contacts" });
+  return <div className="Contacts" />;
 }
 
 function Chat() {
-  return React.createElement("div", { className: "Chat" });
+  return <div className="Chat" />;
 }
 
 function SplitPane(props) {
-  return React.createElement(
-    "div",
-    { className: "SplitPane" },
-    React.createElement(
-      "div",
-      { className: "SplitPane-left" },
-      props.left
-    ),
-    React.createElement(
-      "div",
-      { className: "SplitPane-right" },
-      props.right
-    )
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
   );
 }
 
 function App() {
-  return React.createElement(SplitPane, {
-    left: React.createElement(Contacts, null),
-    right: React.createElement(Chat, null)
-  });
+  return (
+    <SplitPane 
+      left={
+        <Contacts />
+      }
+      right={
+        <Chat />
+      }
+    />
+  );
 }
 
-ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+
+ */
+
+/* Thinking in React */
+
+var ChapRow = function (_React$Component) {
+  _inherits(ChapRow, _React$Component);
+
+  function ChapRow() {
+    _classCallCheck(this, ChapRow);
+
+    return _possibleConstructorReturn(this, (ChapRow.__proto__ || Object.getPrototypeOf(ChapRow)).apply(this, arguments));
+  }
+
+  _createClass(ChapRow, [{
+    key: "render",
+    value: function render() {
+      var item = this.props.item;
+      return React.createElement(
+        "tr",
+        null,
+        React.createElement(
+          "td",
+          null,
+          item.school
+        ),
+        React.createElement(
+          "td",
+          null,
+          item.chaplain
+        )
+      );
+    }
+  }]);
+
+  return ChapRow;
+}(React.Component);
+
+var ChapTable = function (_React$Component2) {
+  _inherits(ChapTable, _React$Component2);
+
+  function ChapTable() {
+    _classCallCheck(this, ChapTable);
+
+    return _possibleConstructorReturn(this, (ChapTable.__proto__ || Object.getPrototypeOf(ChapTable)).apply(this, arguments));
+  }
+
+  _createClass(ChapTable, [{
+    key: "render",
+    value: function render() {
+      var filterText = this.props.filterText;
+      var rows = [];
+      this.props.items.forEach(function (item) {
+        if (item.school.toLowerCase().indexOf(filterText) === -1 && item.chaplain.toLowerCase().indexOf(filterText) === -1) {
+          return;
+        }
+        rows.push(React.createElement(ChapRow, {
+          item: item,
+          key: item.school
+        }));
+      });
+
+      return React.createElement(
+        "table",
+        null,
+        React.createElement(
+          "thead",
+          null,
+          React.createElement(
+            "tr",
+            null,
+            React.createElement(
+              "th",
+              null,
+              "School"
+            ),
+            React.createElement(
+              "th",
+              null,
+              "Chaplain"
+            )
+          )
+        ),
+        React.createElement(
+          "tbody",
+          null,
+          rows
+        )
+      );
+    }
+  }]);
+
+  return ChapTable;
+}(React.Component);
+
+var SearchBar = function (_React$Component3) {
+  _inherits(SearchBar, _React$Component3);
+
+  function SearchBar(props) {
+    _classCallCheck(this, SearchBar);
+
+    var _this3 = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+    _this3.handleFilterTextChange = _this3.handleFilterTextChange.bind(_this3);
+    return _this3;
+  }
+
+  _createClass(SearchBar, [{
+    key: "handleFilterTextChange",
+    value: function handleFilterTextChange(e) {
+      this.props.onFilterTextChange(e.target.value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "form",
+        null,
+        React.createElement("input", {
+          type: "text",
+          placeholder: "Search...",
+          value: this.props.filterText,
+          onChange: this.handleFilterTextChange
+        })
+      );
+    }
+  }]);
+
+  return SearchBar;
+}(React.Component);
+
+var FilterableChapTable = function (_React$Component4) {
+  _inherits(FilterableChapTable, _React$Component4);
+
+  function FilterableChapTable(props) {
+    _classCallCheck(this, FilterableChapTable);
+
+    var _this4 = _possibleConstructorReturn(this, (FilterableChapTable.__proto__ || Object.getPrototypeOf(FilterableChapTable)).call(this, props));
+
+    _this4.state = {
+      filterText: ''
+    };
+    _this4.handleFilterTextChange = _this4.handleFilterTextChange.bind(_this4);
+    return _this4;
+  }
+
+  _createClass(FilterableChapTable, [{
+    key: "handleFilterTextChange",
+    value: function handleFilterTextChange(filterText) {
+      this.setState({
+        filterText: filterText
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(SearchBar, {
+          filterText: this.state.filterText,
+          onFilterTextChange: this.handleFilterTextChange
+        }),
+        React.createElement(ChapTable, {
+          items: this.props.items,
+          filterText: this.state.filterText
+        })
+      );
+    }
+  }]);
+
+  return FilterableChapTable;
+}(React.Component);
+
+var CHAP_APP = [{ school: 'Bega/Tathra Community Chaplaincy', chaplain: 'Darryl Flaherty' }, { school: 'Vardys Road Public School', chaplain: 'Daniel Tuckwell' }, { school: 'Test Public School', chaplain: 'Liza Fox' }, { school: 'Helensburgh Public School', chaplain: 'Nina Sampson' }, { school: 'Miranda Public School', chaplain: 'Tristan Bray' }, { school: 'Illawong Public School', chaplain: 'Jo Tsangarides' }, { school: 'Eden Marine High School', chaplain: 'Darryl Flaherty' }, { school: 'Drummond Memorial Public School', chaplain: '' }, { school: 'Corrimal High School', chaplain: 'Leanne Begg' }, { school: 'Avoca Beach Public School', chaplain: 'Felicity Robinson' }, { school: 'Corowa Public School', chaplain: 'Wendy Thompson' }, { school: 'Cumnock Public School', chaplain: 'Alison Nelson' }];
+
+ReactDOM.render(React.createElement(FilterableChapTable, { items: CHAP_APP }), document.getElementById('container'));
+
+// {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
