@@ -19,6 +19,7 @@
   "homepage": "https://github.com/delias/dek-react-hello#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^7.0.2"
+    "babel-preset-react-app": "^7.0.2",
+    "braces": ">=2.3.1"
   }
 }
